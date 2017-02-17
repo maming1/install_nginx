@@ -1,1 +1,1 @@
-Usage: ansible -i  hosts/hosts nginx_install.yaml
+Usage: ansible-playbook  -i  hosts/hosts nginx_install.yaml
