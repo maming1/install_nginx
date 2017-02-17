@@ -1,0 +1,31 @@
+- name: Install Development Tools
+  yum:  name="@Development tools" state=present
+
+- name: Install Libraries Files
+  yum: name="@Compatibility libraries" state=present
+
+- name: Install Dependent Software
+  yum: name={{item}}  state=present
+  with_items:
+     - libjpeg
+     - libjpeg-devel
+     - libpng
+     - libpng-devel
+     - freetype
+     - freetype-devel
+     - libxml2
+     - libxml2-devel
+     - zlib
+     - zlib-devel
+     - glibc
+     - glibc-devel
+     - bzip2
+     - bzip2-devel
+     - ncurses
+     - ncurses-devel
+     - curl
+     - curl-devel
+     - php
+     - openssl
+     - openssl-devel
+     - pcre-devel

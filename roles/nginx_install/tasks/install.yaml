@@ -1,0 +1,24 @@
+  - name: Create Nginx  Dir
+    file: dest={{ nginx_web_dir }} state=directory
+
+  - name: Create Nginx Advanced Directory
+    file: dest={{ nginx_web_dir }}/conf.d state=directory
+
+  - name: Copy Nginx Software To remote machine
+    copy: src=nginx-{{ nginx_version }}.tar.gz dest=/tmp/nginx-{{ nginx_version }}.tar.gz owner=root group=root
+
+  - name: Uncompression Nginx Software
+    unarchive: src=nginx-{{ nginx_version }}.tar.gz dest=/usr/local/
+
+  - name: Copy Compile Nginx Script
+    template: src=compile.sh.j2 dest=/tmp/compile.sh
+
+  - name: Create Nginx user
+    user: name=nginx  state=present  shell=/sbin/nologin
+
+  - name: Create Nginx Cache Directory
+    file: dest=/var/cache/nginx/   state=directory
+
+
+  - name: Compile the Installation Nginx
+    shell: source /tmp/compile.sh

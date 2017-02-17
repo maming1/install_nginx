@@ -1,0 +1,4 @@
+nginx_user: nginx
+nginx_port: 80
+nginx_web_dir: /etc/nginx
+nginx_version: 1.11.7

@@ -1,0 +1,28 @@
+server {
+    listen       {{nginx_port}};
+    server_name {{ ansible_default_ipv4.address }};
+    location / {
+       root /;
+       index index.jsp index.html index.htm;
+    }
+
+    error_page 502 = /502.html;
+    location ~* ^/upload/.*\.(php|php5)$ {
+                   deny all;
+    }
+    location ~ .*\.(php|php5)?$ {
+                #fastcgi_pass  unix:/tmp/php-cgi.sock;
+        fastcgi_pass  127.0.0.1:9000;
+        fastcgi_index index.php;
+        include fastcgi.conf;
+    }
+
+
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|mp3)$ {
+        expires      30d;
+    }
+
+    location ~ .*\.(js|css)?$ {
+        expires      12h;
+    }
+}
